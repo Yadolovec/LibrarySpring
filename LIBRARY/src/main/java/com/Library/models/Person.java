@@ -1,25 +1,25 @@
 package com.Library.models;
 
 public class Person {
-    private int user_id;
+    private int person_id;
     private String name;
     private int age;
 
 
     public Person(int user_id, String name, int age) {
-        this.user_id = user_id;
+        this.person_id = person_id;
         this.name = name;
         this.age = age;
     }
 
     public Person(){
     };
-    public int getUser_id() {
-        return user_id;
+    public int getPerson_id() {
+        return person_id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
     }
 
     public String getName() {

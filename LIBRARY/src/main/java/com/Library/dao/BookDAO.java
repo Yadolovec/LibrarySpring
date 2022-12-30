@@ -28,20 +28,24 @@ public class BookDAO {
     }
     //save
     public void save(Book book){
-        jdbcTemplate.update("INSERT INTO book (bookName, author, yearOfPublication, user_id) VALUES (?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO book (bookName, author, yearOfPublication, person_id) VALUES (?,?,?,?)",
               book.getBookName(), book.getAuthor(),
-              book.getYearOfPublication(), book.getUser_id());
+              book.getYearOfPublication(), book.getPerson_id());
     }
     //update
     public void update(int id, Book updatedBook){
-        jdbcTemplate.update("UPDATE book SET bookName=?, author=?, yearOfPublication=?, user_id=? WHERE book_id=?",
+        jdbcTemplate.update("UPDATE book SET bookName=?, author=?, yearOfPublication=?, person_id=? WHERE book_id=?",
                 updatedBook.getBookName(), updatedBook.getAuthor(),
-                updatedBook.getYearOfPublication(), updatedBook.getUser_id(), id);
+                updatedBook.getYearOfPublication(), updatedBook.getPerson_id(), id);
     }
     //delete
 
     public void delete(int id){
         jdbcTemplate.update("DELETE FROM book WHERE book_id=?", id);
+    }
+
+    public void freeTheBook(int id){
+        jdbcTemplate.update("UPDATE book SET person_id=? WHERE book_id=?", null, id);
     }
 
 }

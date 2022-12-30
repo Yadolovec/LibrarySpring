@@ -3,17 +3,17 @@ package com.Library.models;
 public class Book {
 
 
-    private int book_id;
+    private Integer book_id;
     private String bookName;
     private String author;
-    private int yearOfPublication;
-    private int user_id;
+    private Integer yearOfPublication;
+    private Integer person_id;
 
-    public int getBook_id() {
+    public Integer getBook_id() {
         return book_id;
     }
 
-    public void setBook_id(int book_id) {
+    public void setBook_id(Integer book_id) {
         this.book_id = book_id;
     }
 
@@ -34,29 +34,40 @@ public class Book {
         this.author = author;
     }
 
-    public int getYearOfPublication() {
+    public Integer getYearOfPublication() {
         return yearOfPublication;
     }
 
-    public void setYearOfPublication(int yearOfPublication) {
+    public void setYearOfPublication(Integer yearOfPublication) {
         this.yearOfPublication = yearOfPublication;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public Integer getPerson_id() {
+        return person_id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setPerson_id(Integer person_id) {
+        this.person_id = person_id;
     }
 
-    public Book(int book_id, String bookName, String author, int yearOfPublication, int user_id) {
+    public Book(Integer book_id, String bookName, String author, Integer yearOfPublication, Integer person_id) {
         this.book_id = book_id;
         this.bookName = bookName;
         this.author = author;
         this.yearOfPublication = yearOfPublication;
-        this.user_id = user_id;
+        this.person_id = person_id;
     }
 
     public Book(){}
+
+    public String forShow(){
+        String toReturn = bookName;
+        if (author!=null)
+            toReturn=toReturn+", by "+author;
+        if (yearOfPublication!=null)
+            toReturn=toReturn+", "+yearOfPublication;
+        return toReturn;
+    }
+
+
 }
