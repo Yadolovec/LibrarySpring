@@ -1,5 +1,6 @@
 package com.Library.controller;
 
+import com.Library.dao.BookDAO;
 import com.Library.dao.PersonDAO;
 import com.Library.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 public class PeopleController {
 
     private final PersonDAO personDAO;
+    private final BookDAO bookDAO;
     @Autowired
-    public PeopleController(PersonDAO personDAO) {
+    public PeopleController(PersonDAO personDAO, BookDAO bookDAO) {
         this.personDAO = personDAO;
+        this.bookDAO = bookDAO;
     }
 
     @GetMapping("/main")
@@ -40,8 +43,9 @@ public class PeopleController {
     }
 
     @GetMapping("/{id}")
-    public String editPerson(Model model, @PathVariable("id") int id){
-        model.addAttribute("person", personDAO.show(id));
+    public String editPerson(Model model, @PathVariable("id") int person_id){
+        model.addAttribute("person", personDAO.show(person_id));
+        model.addAttribute("books", bookDAO.booksOfPerson(person_id));
         return "library/people/show";
     }
 

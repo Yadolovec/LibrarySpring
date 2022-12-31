@@ -62,7 +62,8 @@ public class Book {
 
     public String forShow(){
         String toReturn = bookName;
-        if (author!=null)
+
+        if (!author.isEmpty())
             toReturn=toReturn+", by "+author;
         if (yearOfPublication!=null)
             toReturn=toReturn+", "+yearOfPublication;

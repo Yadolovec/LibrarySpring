@@ -11,6 +11,21 @@
 
   <a th:text="${person.getName()}">NAME</a>
   <br/>
+  <br/>
+
+
+  <some th:if="${books!=null}" >
+      <a>User have these books:</a>
+      <br/>
+      <div th:each="book : ${books}">
+          <a th:href="@{/lib/books/{id}(id=${book.getBook_id()})}"
+             th:text="${book.forShow()}">BOOK</a>
+      </div>
+  </some>
+
+  <some th:unless="${books!=null}" >
+      <a>User have no books</a>
+  </some>
 
   <hr/>
 <form th:method="GET", th:action="@{/lib/people/{id}/delete(id=${person.getPerson_id()})}" >

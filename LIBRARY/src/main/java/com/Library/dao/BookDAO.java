@@ -51,5 +51,12 @@ public class BookDAO {
     public void newOwner(int id, int person_id){
         jdbcTemplate.update("UPDATE book SET person_id=? WHERE book_id=?", person_id, id);
     }
-
+    //get all books of user
+    public List<Book> booksOfPerson(int person_id){
+        List<Book> listOfBook = jdbcTemplate.query("SELECT * FROM book WHERE person_id=?", new Object[]{person_id},
+                new BeanPropertyRowMapper<>(Book.class));
+        if (listOfBook.isEmpty())
+            return null;
+        return listOfBook;
+    }
 }
