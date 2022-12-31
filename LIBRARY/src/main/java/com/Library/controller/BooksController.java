@@ -3,6 +3,7 @@ package com.Library.controller;
 import com.Library.dao.BookDAO;
 import com.Library.dao.PersonDAO;
 import com.Library.models.Book;
+import com.Library.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,6 +46,8 @@ public class BooksController {
 
         Book book = bookDAO.show(id);
         model.addAttribute("book", book);
+        model.addAttribute("people", personDAO.index());
+        model.addAttribute("newOwner", new Person());
         if (book.getPerson_id()!=null)
             model.addAttribute("person", personDAO.show(book.getPerson_id()));
 
@@ -75,4 +78,9 @@ public class BooksController {
         return "redirect:/lib/books/"+id;
     }
 
+    @PatchMapping("/{id}/newOwner")
+    public String newOwner(@ModelAttribute("newOwner") Person person, @PathVariable("id")  int id){
+        bookDAO.newOwner(id, person.getPerson_id());
+        return "redirect:/lib/books/"+id;
+    }
 }
