@@ -1,19 +1,33 @@
 package com.Library.models;
 
+import org.springframework.format.annotation.NumberFormat;
+
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 public class Book {
 
+    private int bookID;
 
     private Integer book_id;
+    @NotEmpty(message = "Book has to have a name")
     private String bookName;
     private String author;
+
+
     private Integer yearOfPublication;
     private Integer person_id;
 
     public Integer getBook_id() {
+        System.out.println(bookName+" "+book_id);
+        if (book_id==null)
+            return bookID;
         return book_id;
     }
 
     public void setBook_id(Integer book_id) {
+        this.bookID = book_id;
         this.book_id = book_id;
     }
 

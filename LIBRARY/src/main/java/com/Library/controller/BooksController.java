@@ -7,7 +7,10 @@ import com.Library.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/lib/books")
@@ -36,7 +39,10 @@ public class BooksController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("book") Book book){
+    public String create(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors())
+            return "library/books/new";
         bookDAO.save(book);
         return "redirect:/lib/books";
     }
@@ -61,14 +67,18 @@ public class BooksController {
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable("id") int id, Model model){
+    public String edit(Model model, @PathVariable("id") int id){
         model.addAttribute("book", bookDAO.show(id));
-        return "library/books/edit";
+        return "/library/books/edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@PathVariable("id") int id, @ModelAttribute("book") Book bookToUpdate){
-        bookDAO.update(id, bookToUpdate);
+    public String update(Model model, @ModelAttribute("book") @Valid Book book, BindingResult bindingResult, @PathVariable("id") int id){
+        if (bindingResult.hasErrors()) {
+            return "/library/books/edit";
+        }
+
+        bookDAO.update(id, book);
         return "redirect:/lib/books";
     }
 

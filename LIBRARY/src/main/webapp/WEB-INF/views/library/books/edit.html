@@ -6,12 +6,19 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/lib/books/{id} (id=${book.getBook_id()})}" th:object="${book}">
+<form th:method="PATCH" th:action="@{/lib/books/{id}(id=${book.getBook_id()})}" th:object="${book}">
+
+  <div th:text="${book.getBook_id()}">BOOK</div>
+  <div th:text="${book.getBookName()}">BOOK</div>
+  <div th:text="${book.getAuthor()}">BOOK</div>
+  <div th:text="${book.forShow()}">BOOK</div>
+
   <label for="bookName">Enter name:</label>
   <br/>
+
   <input id="bookName" type="text" th:field="*{bookName}"/>
   <br/>
-
+  <div style="color: red" th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}">bookName ERROR</div>
   <label for="author">Enter author:</label>
   <br/>
   <input id="author" type="text" th:field="*{author}"/>
@@ -19,6 +26,8 @@
 
   <label for="yearOfPublication">Enter yearOfPublication:</label>
   <br/>
+
+  <div style="color: red" th:if="${#fields.hasErrors('yearOfPublication')}" th:errors="*{yearOfPublication}">yearOfPublication ERROR</div>
   <input id="yearOfPublication" type="text" th:field="*{yearOfPublication}"/>
   <br/>
 
