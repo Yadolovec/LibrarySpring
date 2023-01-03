@@ -8,9 +8,8 @@ import javax.validation.constraints.Pattern;
 
 public class Book {
 
-    private int bookID;
 
-    private Integer book_id;
+    private int book_id;
     @NotEmpty(message = "Book has to have a name")
     private String bookName;
     private String author;
@@ -19,15 +18,11 @@ public class Book {
     private Integer yearOfPublication;
     private Integer person_id;
 
-    public Integer getBook_id() {
-        System.out.println(bookName+" "+book_id);
-        if (book_id==null)
-            return bookID;
+    public int getBook_id() {
         return book_id;
     }
 
-    public void setBook_id(Integer book_id) {
-        this.bookID = book_id;
+    public void setBook_id(int book_id) {
         this.book_id = book_id;
     }
 

@@ -1,12 +1,14 @@
 package com.Library.dao;
 
 import com.Library.models.Book;
+import com.Library.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BookDAO {
@@ -58,5 +60,10 @@ public class BookDAO {
         if (listOfBook.isEmpty())
             return null;
         return listOfBook;
+    }
+
+    public Optional<Person> getBookOwner(int id){
+        return jdbcTemplate.query("SELECT person.* FROM book JOIN person ON book.person_id = person.person_id WHERE book.book_id=?",
+                new Object[]{id}, new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 }

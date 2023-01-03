@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/lib/books")
@@ -54,8 +55,9 @@ public class BooksController {
         model.addAttribute("book", book);
         model.addAttribute("people", personDAO.index());
         model.addAttribute("newOwner", new Person());
-        if (book.getPerson_id()!=null)
-            model.addAttribute("person", personDAO.show(book.getPerson_id()));
+        Optional<Person> owner = bookDAO.getBookOwner(id);
+        if (owner.isPresent())
+            model.addAttribute("person", owner.get());
 
         return "library/books/show";
     }
