@@ -9,7 +9,7 @@
 <br/>
 <hr/>
 <div th:each="book : ${books}">
-  <a th:href="@{/lib/books/{id}(id=${book.getBook_id()})}"
+  <a th:href="@{/lib/books/{id}(id=${book.getId()})}"
      th:text="${book.forShow()}">BOOK</a>
 
 

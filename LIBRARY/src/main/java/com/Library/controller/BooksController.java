@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes("book")
+//@SessionAttributes("book")
 @RequestMapping("/lib/books")
 public class BooksController {
 
@@ -45,6 +45,7 @@ public class BooksController {
 
         if (bindingResult.hasErrors())
             return "library/books/new";
+
         bookDAO.save(book);
         return "redirect:/lib/books";
     }
@@ -80,10 +81,10 @@ public class BooksController {
     public String update(Model model, @Valid @ModelAttribute("book") Book book, BindingResult bindingResult, @PathVariable("id") int id){
 
         Book b1 = (Book)model.getAttribute("book");
-        System.out.println("In update id = "+b1.getBook_id());
+        System.out.println("In update id = "+b1.getId());
         System.out.println("In update name = "+b1.getBookName());
         if (bindingResult.hasErrors()) {
-            System.out.println("In update  IF id = "+b1.getBook_id());
+            System.out.println("In update  IF id = "+b1.getId());
             return "/library/books/edit";
         }
 

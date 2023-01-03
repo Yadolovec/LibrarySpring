@@ -8,7 +8,7 @@
 
 
     <a>ID: </a>
-    <a th:text="${book.getBook_id()}">ID</a>
+    <a th:text="${book.getId()}">ID</a>
     <br/>
     <br/>
 
@@ -34,7 +34,7 @@
         <a th:text="${person.getName()}">NAME PERSON</a>
     </div>
     <form   th:if="${book.getPerson_id()!=null}"
-            th:method="PATCH", th:action="@{/lib/books/{id}/free(id=${book.getBook_id()})}" >
+            th:method="PATCH", th:action="@{/lib/books/{id}/free(id=${book.getId()})}" >
         <br/>
         <input type="submit" value="FREE this book"/>
     </form>
@@ -44,7 +44,7 @@
     </div>
 
     <form th:method="PATCH"
-          th:action="@{/lib/books/{id}/newOwner(id=${book.getBook_id()})}"
+          th:action="@{/lib/books/{id}/newOwner(id=${book.getId()})}"
           th:unless="${book.getPerson_id()!=null}">
         <label for="person">Choose the worthy</label>
         <select id="person" th:object="${newOwner}" th:field="*{person_id}">
@@ -61,11 +61,11 @@
 
 
     <hr/>
-    <form th:method="GET", th:action="@{/lib/books/{id}/delete(id=${book.getBook_id()})}" >
+    <form th:method="GET", th:action="@{/lib/books/{id}/delete(id=${book.getId()})}" >
       <input type="submit" value="DElete"/>
     </form>
 
-    <form th:method="GET", th:action="@{/lib/books/{id}/edit(id=${book.getBook_id()})}" >
+    <form th:method="GET", th:action="@{/lib/books/{id}/edit(id=${book.getId()})}" >
       <input type="submit" value="EDit"/>
     </form>
 </body>
