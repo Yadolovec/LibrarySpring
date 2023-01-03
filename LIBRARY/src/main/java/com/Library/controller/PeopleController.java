@@ -3,10 +3,14 @@ package com.Library.controller;
 import com.Library.dao.BookDAO;
 import com.Library.dao.PersonDAO;
 import com.Library.models.Person;
+import com.Library.utils.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/lib/people")
@@ -14,10 +18,13 @@ public class PeopleController {
 
     private final PersonDAO personDAO;
     private final BookDAO bookDAO;
+
+    private final PersonValidator personValidator;
     @Autowired
-    public PeopleController(PersonDAO personDAO, BookDAO bookDAO) {
+    public PeopleController(PersonDAO personDAO, BookDAO bookDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
         this.bookDAO = bookDAO;
+        this.personValidator = personValidator;
     }
 
     @GetMapping("/main")
@@ -37,7 +44,13 @@ public class PeopleController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("person") Person person){
+    public String create(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult){
+
+        personValidator.validate(person, bindingResult);
+
+
+        if (bindingResult.hasErrors())
+            return "library/people/new";
         personDAO.save(person);
         return "redirect:/lib/people";
     }
@@ -62,7 +75,12 @@ public class PeopleController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@PathVariable("id") int id, @ModelAttribute("person") Person personToUpdate){
+    public String update(@PathVariable("id") int id, @ModelAttribute("person") @Valid Person personToUpdate, BindingResult bindingResult){
+
+        personValidator.validate(personToUpdate, bindingResult);
+
+        if (bindingResult.hasErrors())
+            return "library/people/edit";
         personDAO.update(id, personToUpdate);
         return "redirect:/lib/people";
     }

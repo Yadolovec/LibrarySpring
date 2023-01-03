@@ -59,7 +59,7 @@ public class Book {
         this.person_id = person_id;
     }
 
-    public Book(Integer book_id, String bookName, String author, Integer yearOfPublication, Integer person_id) {
+    public Book(int book_id, String bookName, String author, Integer yearOfPublication, Integer person_id) {
         this.book_id = book_id;
         this.bookName = bookName;
         this.author = author;

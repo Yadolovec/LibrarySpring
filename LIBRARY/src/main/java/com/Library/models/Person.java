@@ -1,7 +1,12 @@
 package com.Library.models;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
+import javax.validation.constraints.Pattern;
+
 public class Person {
     private int person_id;
+    @Pattern(regexp = "[A-Z]\\w+", message = "Should start with big letter")
     private String name;
     private int age;
 
@@ -37,6 +42,7 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
+
 
 
 }
