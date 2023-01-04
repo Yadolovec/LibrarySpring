@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 public class Book {
 
 
-    private Integer id;
+    private int id;
     @NotEmpty(message = "Book has to have a name")
     private String bookName;
     private String author;
@@ -14,7 +14,7 @@ public class Book {
     private Integer yearOfPublication;
     private Integer person_id;
 
-    public Book(Integer id, String bookName, String author, Integer yearOfPublication, Integer person_id) {
+    public Book(int id, String bookName, String author, Integer yearOfPublication, Integer person_id) {
         this.id = id;
         this.bookName = bookName;
         this.author = author;
@@ -25,14 +25,11 @@ public class Book {
     public Book(){}
 
 
-    public Integer getId() {
-
-        if (id==null)
-            System.out.println("Problem with id");
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

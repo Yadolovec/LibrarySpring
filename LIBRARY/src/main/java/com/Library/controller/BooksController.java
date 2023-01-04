@@ -14,7 +14,6 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-//@SessionAttributes("book")
 @RequestMapping("/lib/books")
 public class BooksController {
 
